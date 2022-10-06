@@ -13,7 +13,7 @@ class Person {
   }
 }
 
-public class BIngoGame2 {
+public class BingoGame2 {
 
   public static void main(String args[]) {
     boolean flag = true;
