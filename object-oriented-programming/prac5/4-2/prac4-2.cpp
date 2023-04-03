@@ -13,11 +13,11 @@ int main(int argc, const char* argv[]) {
     
     cout << "이름을 " << MAX_LENGTH << "개 입력하라\n";
     
-    for(int k=1; k <= MAX_LENGTH; k++) {
-        cout << k << "<<";
+    for(int k=0; k < MAX_LENGTH; k++) {
+        cout << k+1<< "<<";
         getline(cin, name);
         namesVector.push_back(name);
-        maxName = maxName < name ? name : maxName;
+        maxName = maxName < namesVector.at(k) ? namesVector.at(k) : maxName;
     } cout << "사전에서 가장 뒤에 나오는 이름은 " << maxName;
     
     return 0;
