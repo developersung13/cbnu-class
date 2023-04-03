@@ -5,27 +5,11 @@ class Integer {
   private:
     int n;
   public:
-    Integer(int n);
-    int get();
-    void set(int n);
-    int isEven();
+    Integer(int n) { this->n = n; }
+    int get() { return n; }
+    void set(int n) { this->n = n; }
+    int isEven() { return !(n & 1);}
 };
-
-inline Integer::Integer(int n) {
-    this->n = n;
-}
-
-inline int Integer::get() {
-    return this->n;
-}
-
-inline void Integer::set(int n) {
-    this->n = n;
-}
-
-inline int Integer::isEven() {
-    return !(this->n & 1);
-}
 
 int main(int argc, const char* argv[]) {
     ios_base::sync_with_stdio(false);
