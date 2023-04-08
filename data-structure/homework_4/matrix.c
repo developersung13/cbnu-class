@@ -109,6 +109,44 @@ void subtraction_matrix(int **matrixA, int **matrixB) {
     print_matrix(matrixA, matrixB, matrixResult, '-');
 }
 
+// 행렬 A의 전치행렬 T를 구하는 함수
+void transpose_matrix(int **matrixA, int **matrixB) {
+    int k, z; // for문의 인덱스 변수로써 사용될 변수 k, z 선언
+    
+    // 행렬 A의 전치행렬로써 연산 결괏값을 저장하는 용도로 사용될 행렬 result선언
+    // 행렬 result의 행에 대한 동적 메모리 할당
+    int **matrixResult = (int**)malloc(sizeof(int *) * matrixA_column);
+    // 행렬 result의 열에 대한 동적 메모리 할당
+    for (k=0; k < matrixA_column; k++)
+        matrixResult[k] = (int*)malloc(sizeof(int) * matrixA_row);
+    
+    // 행렬 A를 전치시킨 값을 행렬 result에 저장
+    for (k=0; k < matrixA_row; k++) // row번 만큼 반복
+        for (z=0; z < matrixA_column; z++) // column번 만큼 반복
+            matrixResult[z][k] = matrixA[k][z];
+            
+    /* 행렬 A를 전치된 행렬로써 다시 저장할 수 있도록 realloc 함수를 사용하여
+    row와 column이 서로 바뀐 크기로 동적 메모리 재할당, 행렬 A의 행에 대한 동적 메모리 재할당*/
+    matrixA = (int**)realloc(matrixA, sizeof(int*) * matrixA_column);
+    // 행렬 A의 열에 대한 동적 메모리 재할당
+    for (k=0; k < matrixA_column; k++)
+        matrixA[k] = (int*)realloc(matrixA[k], sizeof(int) * matrixA_row);
+        
+    /* 행렬 A의 전치행렬로써 저장된 행렬 result의 값을
+    다시 동적 메모리 재할당된 행렬 A에 대입 */
+    for (k=0; k < matrixA_column; k++) // matrixA_column번 만큼 반복
+        for (z=0; z < matrixA_row; z++) // matrixA_row번 만큼 반복
+            matrixA[k][z] = matrixResult[k][z];
+    
+    // 행렬 A를 전치행렬로 변환하기 위해 기존 행렬 A의 행과 열의 값을 서로 교환(SWAP)
+    int temp = matrixA_row;
+    matrixA_row = matrixA_column;
+    matrixA_column = temp;
+    
+    // 행렬 A, B와 전치된 행렬 A의 결괏값을 출력하는 print_matrix함수 호출
+    print_matrix(matrixA, matrixB, matrixResult, '~');
+}
+
 // int형 데이터를 반환하는 main 함수 정의
 int main() {
     srand(time(NULL)); // 난수 생성 시 초기 시드 값을 설정
@@ -149,6 +187,9 @@ int main() {
 
     // 행렬 A - B 연산을 수행하는 함수 호출
     subtraction_matrix(matrixA, matrixB);
+
+    // 행렬 A를 전치행렬로 만드는 함수 호출
+    transpose_matrix(matrixA, matrixB);
 
     // matrixA 변수(=행렬 A) 동적 메모리 할당 해제
     free_matrix(matrixA);
