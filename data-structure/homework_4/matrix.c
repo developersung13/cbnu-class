@@ -147,6 +147,29 @@ void transpose_matrix(int **matrixA, int **matrixB) {
     print_matrix(matrixA, matrixB, matrixResult, '~');
 }
 
+// 행렬 A X B한 결괏값을 출력하는 함수
+void multiply_matrix(int **matrixA, int **matrixB) {
+    int k, z, i; // for문의 인덱스 변수로써 사용될 변수 k, z, i 선언
+    
+    // 행렬 A, B의 연산 결괏값을 저장하는 용도로 사용될 행렬 result선언
+    // 행렬 result의 행에 대한 동적 메모리 할당
+    int **matrixResult = (int**)malloc(sizeof(int *) * matrixA_row);
+    // 행렬 result의 열에 대한 동적 메모리 할당
+    for (k=0; k < matrixA_row; k++)
+        matrixResult[k] = (int*)malloc(sizeof(int) * matrixB_column);
+    
+    // 행렬 A, B의 값을 행렬의 규칙에 맞게 각각 곱한 값을 결과 행렬에 저장
+    for (k=0; k < matrixA_row; k++) // matrixA_row번 만큼 반복
+        for (z=0; z < matrixB_column; z++) { // matrixB_column번 만큼 반복
+            matrixResult[k][z] = 0;
+            for (i=0; i < matrixA_column; i++) // matrixA_column번 만큼 반복
+                matrixResult[k][z] += matrixA[k][i] * matrixB[i][z];
+        }
+    
+    // 행렬 A, B와 A X B된 결괏값을 출력하는 print_matrix함수 호출
+    print_matrix(matrixA, matrixB, matrixResult, 'X');
+}
+
 // int형 데이터를 반환하는 main 함수 정의
 int main() {
     srand(time(NULL)); // 난수 생성 시 초기 시드 값을 설정
@@ -190,6 +213,9 @@ int main() {
 
     // 행렬 A를 전치행렬로 만드는 함수 호출
     transpose_matrix(matrixA, matrixB);
+
+    // 행렬 A X B 연산을 수행하는 함수 호출
+    multiply_matrix(matrixA, matrixB);
 
     // matrixA 변수(=행렬 A) 동적 메모리 할당 해제
     free_matrix(matrixA);
