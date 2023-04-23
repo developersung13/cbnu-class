@@ -21,3 +21,24 @@ int main(int argc, const char* argv[]) {
     
     return 0;
 }
+
+// #include <iostream>
+// using namespace std;
+
+// // 제네릭 함수 add
+// template <class T, size_t N> T add(T (&ary)[N]) {
+//   T total = 0;
+//   for (int k = 0; k < N; k++)
+//     total += ary[k];
+//   return total;
+// }
+
+// int main() {
+//   int x[] = {1, 2, 3, 4, 5};
+//   double d[] = {1.2, 2.3, 3.4, 4.5, 5.6, 6.7};
+
+//   cout << "sum_of x[] = " << add(x) << '\n';
+//   cout << "sum_if d[] = " << add(d) << '\n';
+
+//   return 0;
+// }
