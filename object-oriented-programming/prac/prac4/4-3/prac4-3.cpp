@@ -3,14 +3,11 @@ using namespace std;
 
 class Rectangle {
   public:
-    double width;
-    double height;
+    double width, height;
     double getArea();
 };
 
-inline double Rectangle::getArea() {
-    return width * height;
-}
+double Rectangle::getArea() { return width * height; }
 
 int main(int argc, const char* argv[]) {
     ios_base::sync_with_stdio(false);
