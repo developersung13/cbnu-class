@@ -2,225 +2,341 @@
  * singly linked list
  *
  *  Data Structures
- *  School of Computer Science 
+ *  School of Computer Science
  *  at Chungbuk National University
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 
-#include<stdio.h>
-#include<stdlib.h>
-
-/* í•„ìš”í•œ í—¤ë”íŒŒì¼ ì¶”ê°€ */
+/* 필요한 헤더파일 추가 */
 
 typedef struct Node {
-	int key;
-	struct Node* link;
+  int key;
+  struct Node *link;
 } listNode;
 
 typedef struct Head {
-	struct Node* first;
+  struct Node *first;
 } headNode;
 
+/* 함수 리스트 */
+headNode *initialize(headNode *h);
+int freeList(headNode *h);
 
-/* í•¨ìˆ˜ ë¦¬ìŠ¤íŠ¸ */
-headNode* initialize(headNode* h);
-int freeList(headNode* h);
+int insertFirst(headNode *h, int key);
+int insertNode(headNode *h, int key);
+int insertLast(headNode *h, int key);
 
-int insertFirst(headNode* h, int key);
-int insertNode(headNode* h, int key);
-int insertLast(headNode* h, int key);
+int deleteFirst(headNode *h);
+int deleteNode(headNode *h, int key);
+int deleteLast(headNode *h);
+int invertList(headNode *h);
 
-int deleteFirst(headNode* h);
-int deleteNode(headNode* h, int key);
-int deleteLast(headNode* h);
-int invertList(headNode* h);
+void printList(headNode *h);
 
-void printList(headNode* h);
+int main() {
+  char command;
+  int key;
+  headNode *headnode = NULL;
 
-int main()
-{
-	char command;
-	int key;
-	headNode* headnode=NULL;
+  do {
+    printf(
+        "----------------------------------------------------------------\n");
+    printf(
+        "                     Singly Linked List                         \n");
+    printf(
+        "----------------------------------------------------------------\n");
+    printf(" Initialize    = z           Print         = p \n");
+    printf(" Insert Node   = i           Delete Node   = d \n");
+    printf(" Insert Last   = n           Delete Last   = e\n");
+    printf(" Insert First  = f           Delete First  = t\n");
+    printf(" Invert List   = r           Quit          = q\n");
+    printf(
+        "----------------------------------------------------------------\n");
 
-	do{
-		printf("----------------------------------------------------------------\n");
-		printf("                     Singly Linked List                         \n");
-		printf("----------------------------------------------------------------\n");
-		printf(" Initialize    = z           Print         = p \n");
-		printf(" Insert Node   = i           Delete Node   = d \n");
-		printf(" Insert Last   = n           Delete Last   = e\n");
-		printf(" Insert First  = f           Delete First  = t\n");
-		printf(" Invert List   = r           Quit          = q\n");
-		printf("----------------------------------------------------------------\n");
+    printf("Command = ");
+    scanf(" %c", &command);
 
-		printf("Command = ");
-		scanf(" %c", &command);
+    switch (command) {
+    case 'z':
+    case 'Z':
+      headnode = initialize(headnode);
+      break;
+    case 'p':
+    case 'P':
+      printList(headnode);
+      break;
+    case 'i':
+    case 'I':
+      printf("Your Key = ");
+      scanf("%d", &key);
+      insertNode(headnode, key);
+      break;
+    case 'd':
+    case 'D':
+      printf("Your Key = ");
+      scanf("%d", &key);
+      deleteNode(headnode, key);
+      break;
+    case 'n':
+    case 'N':
+      printf("Your Key = ");
+      scanf("%d", &key);
+      insertLast(headnode, key);
+      break;
+    case 'e':
+    case 'E':
+      deleteLast(headnode);
+      break;
+    case 'f':
+    case 'F':
+      printf("Your Key = ");
+      scanf("%d", &key);
+      insertFirst(headnode, key);
+      break;
+    case 't':
+    case 'T':
+      deleteFirst(headnode);
+      break;
+    case 'r':
+    case 'R':
+      invertList(headnode);
+      break;
+    case 'q':
+    case 'Q':
+      freeList(headnode);
+      break;
+    default:
+      printf("\n       >>>>>   Concentration!!   <<<<<     \n");
+      break;
+    }
 
-		switch(command) {
-		case 'z': case 'Z':
-			headnode = initialize(headnode);
-			break;
-		case 'p': case 'P':
-			printList(headnode);
-			break;
-		case 'i': case 'I':
-			printf("Your Key = ");
-			scanf("%d", &key);
-			insertNode(headnode, key);
-			break;
-		case 'd': case 'D':
-			printf("Your Key = ");
-			scanf("%d", &key);
-			deleteNode(headnode, key);
-			break;
-		case 'n': case 'N':
-			printf("Your Key = ");
-			scanf("%d", &key);
-			insertLast(headnode, key);
-			break;
-		case 'e': case 'E':
-			deleteLast(headnode);
-			break;
-		case 'f': case 'F':
-			printf("Your Key = ");
-			scanf("%d", &key);
-			insertFirst(headnode, key);
-			break;
-		case 't': case 'T':
-			deleteFirst(headnode);
-			break;
-		case 'r': case 'R':
-			invertList(headnode);
-			break;
-		case 'q': case 'Q':
-			freeList(headnode);
-			break;
-		default:
-			printf("\n       >>>>>   Concentration!!   <<<<<     \n");
-			break;
-		}
+  } while (command != 'q' && command != 'Q');
 
-	}while(command != 'q' && command != 'Q');
-
-	return 1;
+  return 1;
 }
 
-headNode* initialize(headNode* h) {
+headNode *initialize(headNode *h) {
 
-	/* headNodeê°€ NULLì´ ì•„ë‹ˆë©´, freeNodeë¥¼ í˜¸ì¶œí•˜ì—¬ í• ë‹¹ëœ ë©”ëª¨ë¦¬ ëª¨ë‘ í•´ì œ */
-	if(h != NULL)
-		freeList(h);
+  /* headNode가 NULL이 아니면, freeNode를 호출하여 할당된 메모리 모두 해제 */
+  if (h != NULL)
+    freeList(h);
 
-	/* headNodeì— ëŒ€í•œ ë©”ëª¨ë¦¬ë¥¼ í• ë‹¹í•˜ì—¬ ë¦¬í„´ */
-	headNode* temp = (headNode*)malloc(sizeof(headNode));
-	temp->first = NULL;
-	return temp;
+  /* headNode에 대한 메모리를 할당하여 리턴 */
+  headNode *temp = (headNode *)malloc(sizeof(headNode));
+  temp->first = NULL;
+  return temp;
 }
 
-int freeList(headNode* h){
-	/* hì™€ ì—°ê²°ëœ listNode ë©”ëª¨ë¦¬ í•´ì œ
-	 * headNodeë„ í•´ì œë˜ì–´ì•¼ í•¨.
-	 */
-	listNode* p = h->first;
+int freeList(headNode *h) {
+  /* h와 연결된 listNode 메모리 해제
+   * headNode도 해제되어야 함.
+   */
+  listNode *p = h->first;
 
-	listNode* prev = NULL;
-	while(p != NULL) {
-		prev = p;
-		p = p->link;
-		free(prev);
-	}
-	free(h);
-	return 0;
-}
-
-
-
-/**
- * list ì²˜ìŒì— keyì— ëŒ€í•œ ë…¸ë“œí•˜ë‚˜ë¥¼ ì¶”ê°€
- */
-int insertFirst(headNode* h, int key) {
-
-	listNode* node = (listNode*)malloc(sizeof(listNode));
-	node->key = key;
-
-	node->link = h->first;
-	h->first = node;
-
-	return 0;
-}
-
-
-/* ë¦¬ìŠ¤íŠ¸ë¥¼ ê²€ìƒ‰í•˜ì—¬, ìž…ë ¥ë°›ì€ keyë³´ë‹¤ í°ê°’ì´ ë‚˜ì˜¤ëŠ” ë…¸ë“œ ë°”ë¡œ ì•žì— ì‚½ìž… */
-int insertNode(headNode* h, int key) {
-
-	return 0;
+  listNode *prev = NULL;
+  while (p != NULL) {
+    prev = p;
+    p = p->link;
+    free(prev);
+  }
+  free(h);
+  return 0;
 }
 
 /**
- * listì— keyì— ëŒ€í•œ ë…¸ë“œí•˜ë‚˜ë¥¼ ì¶”ê°€
+ * list 처음에 key에 대한 노드하나를 추가
  */
-int insertLast(headNode* h, int key) {
+int insertFirst(headNode *h, int key) {
+  listNode *node = (listNode *)malloc(sizeof(listNode));
+  node->key = key;
 
-	return 0;
+  node->link = h->first;
+  h->first = node;
+
+  return 0;
 }
 
+/* 리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 */
+int insertNode(headNode *h, int key) {
+  listNode *p = h->first;
+  listNode *node = (listNode *)malloc(sizeof(listNode));
+  node->key = key;
+  node->link = NULL;
+
+  // 리스트가 비어있는 경우
+  if (p == NULL) {
+    h->first = node;
+    return 0;
+  }
+
+  // key가 첫번째 노드보다 작은 경우
+  if (p->key > key) {
+    node->link = p;
+    h->first = node;
+    return 0;
+  }
+
+  // 중간에 삽입하는 경우
+  while (p->link != NULL && p->link->key <= key) {
+    p = p->link;
+  }
+  node->link = p->link;
+  p->link = node;
+
+  return 0;
+}
 
 /**
- * listì˜ ì²«ë²ˆì§¸ ë…¸ë“œ ì‚­ì œ
+ * list에 key에 대한 노드하나를 추가
  */
-int deleteFirst(headNode* h) {
+int insertLast(headNode *h, int key) {
+  listNode *p = h->first;
+  listNode *node = (listNode *)malloc(sizeof(listNode));
+  node->key = key;
+  node->link = NULL;
 
+  // 리스트가 비어있는 경우
+  if (p == NULL) {
+    h->first = node;
+    return 0;
+  }
 
-	return 0;
+  while (p->link != NULL) {
+    p = p->link;
+  }
+
+  p->link = node;
+
+  return 0;
 }
-
 
 /**
- * listì—ì„œ keyì— ëŒ€í•œ ë…¸ë“œ ì‚­ì œ
+ * list의 첫번째 노드 삭제
  */
-int deleteNode(headNode* h, int key) {
+int deleteFirst(headNode *h) {
+  listNode *p = h->first;
 
-	return 0;
+  if (p == NULL) {
+    free(p);
+    printf("Nothing to delete....\n");
+    return 0;
+  }
 
+  h->first = p->link;
+  free(p);
+
+  return 0;
 }
 
 /**
- * listì˜ ë§ˆì§€ë§‰ ë…¸ë“œ ì‚­ì œ
+ * list에서 key에 대한 노드 삭제
  */
-int deleteLast(headNode* h) {
+int deleteNode(headNode *h, int key) {
+  listNode *p = h->first;
+  listNode *prev = NULL;
 
-	return 0;
+  // 리스트가 비어있는 경우
+  if (p == NULL) {
+    free(p);
+    printf("Nothing to delete....\n");
+    return 0;
+  }
+
+  while (p != NULL && p->key != key) {
+    prev = p;
+    p = p->link;
+  }
+
+  // key를 찾지 못한 경우
+  if (p == NULL) {
+    printf("Cannot found the key....\n");
+    return 0;
+  }
+
+  // 첫번째 노드를 삭제하는 경우
+  if (prev == NULL) {
+    h->first = p->link;
+    free(p);
+    return 0;
+  }
+
+  // 중간에 있는 노드를 삭제하는 경우
+  prev->link = p->link;
+  free(p);
+
+  return 0;
 }
-
 
 /**
- * ë¦¬ìŠ¤íŠ¸ì˜ ë§í¬ë¥¼ ì—­ìˆœìœ¼ë¡œ ìž¬ ë°°ì¹˜
+ * list의 마지막 노드 삭제
  */
-int invertList(headNode* h) {
+int deleteLast(headNode *h) {
+  listNode *p = h->first;
+  listNode *prev = NULL;
 
-	return 0;
+  // 리스트가 비어있는 경우
+  if (p == NULL) {
+    free(p);
+    printf("Nothing to delete....\n");
+    return 0;
+  }
+
+  if (p->link == NULL) {
+    free(p);
+    h->first = NULL;
+    return 0;
+  }
+
+  while (p->link != NULL) {
+    prev = p;
+    p = p->link;
+  }
+  prev->link = NULL;
+  free(p);
+
+  return 0;
 }
 
+/**
+ * 리스트의 링크를 역순으로 재 배치
+ */
+int invertList(headNode *h) {
+  listNode *prev = NULL;
+  listNode *current = h->first;
+  listNode *next = NULL;
 
-void printList(headNode* h) {
-	int i = 0;
-	listNode* p;
+  while (current != NULL) {
+    next = current->link;
+    current->link = prev;
+    prev = current;
+    current = next;
+  }
 
-	printf("\n---PRINT\n");
+  h->first = prev;
 
-	if(h == NULL) {
-		printf("Nothing to print....\n");
-		return;
-	}
+  return 0;
+}
 
-	p = h->first;
+void printList(headNode *h) {
+  int i = 0;
+  listNode *p;
 
-	while(p != NULL) {
-		printf("[ [%d]=%d ] ", i, p->key);
-		p = p->link;
-		i++;
-	}
+  printf("\n---PRINT\n");
 
-	printf("  items = %d\n", i);
+  if (h == NULL) {
+    printf("Nothing to print....\n");
+    return;
+  }
+
+  p = h->first;
+
+  while (p != NULL) {
+    printf("[ [%d]=%d ] ", i, p->key);
+    p = p->link;
+    i++;
+  }
+
+  printf("  items = %d\n", i);
 }
