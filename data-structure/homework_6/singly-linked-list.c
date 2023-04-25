@@ -6,21 +6,23 @@
  *  at Chungbuk National University
  */
 
+/* 필요한 헤더파일 추가 */
 #include <stdio.h>
 #include <stdlib.h>
 
-/* 필요한 헤더파일 추가 */
-
+// 연결리스트에서 사용될 노드 구조체 정의
 typedef struct Node {
-  int key;
-  struct Node *link;
+  int key; // 노드에 저장될 정수 값
+  struct Node *link; // 다음 노드를 가리키는 포인터
 } listNode;
 
+// 헤드(시작 노드를 가리키는) 노드 구조체 정의
 typedef struct Head {
+  // 연결 리스트의 첫 번째 노드를 가리키는 포인터
   struct Node *first;
 } headNode;
 
-/* 함수 리스트 */
+/* 연결 리스트 조작 관련 함수 원형 선언 */
 headNode *initialize(headNode *h);
 int freeList(headNode *h);
 
@@ -36,9 +38,12 @@ int invertList(headNode *h);
 void printList(headNode *h);
 
 int main() {
-  char command;
-  int key;
-  headNode *headnode = NULL;
+  char command; // 명령어 값 저장 변수 선언
+  int key; // 연결리스트의 각 노드에 저장될 key값 변수 선언
+  headNode *headnode = NULL; // 연결 리스트의 헤드 노드로 사용될 포인터 변수 선언
+
+  // [---- [Sung Yeolam, 성열암] [2020039037] ----] 문장 출력 및 개행
+	printf("[---- [Sung Yeolam, 성열암] [2020039037] ----]\n");
 
   do {
     printf(
@@ -55,9 +60,11 @@ int main() {
     printf(
         "----------------------------------------------------------------\n");
 
+	// 명령어 입력
     printf("Command = ");
     scanf(" %c", &command);
 
+	// 명령어에 따라 특정 코드 수행
     switch (command) {
     case 'z':
     case 'Z':
@@ -117,6 +124,7 @@ int main() {
   return 1;
 }
 
+// 연결 리스트 초기화 함수 정의
 headNode *initialize(headNode *h) {
 
   /* headNode가 NULL이 아니면, freeNode를 호출하여 할당된 메모리 모두 해제 */
@@ -129,6 +137,7 @@ headNode *initialize(headNode *h) {
   return temp;
 }
 
+// 연결 리스트 동적할당 해제 함수 정의
 int freeList(headNode *h) {
   /* h와 연결된 listNode 메모리 해제
    * headNode도 해제되어야 함.
@@ -146,7 +155,7 @@ int freeList(headNode *h) {
 }
 
 /**
- * list 처음에 key에 대한 노드하나를 추가
+ * list 처음에 key에 대한 노드 하나를 추가
  */
 int insertFirst(headNode *h, int key) {
   listNode *node = (listNode *)malloc(sizeof(listNode));
@@ -165,20 +174,20 @@ int insertNode(headNode *h, int key) {
   node->key = key;
   node->link = NULL;
 
-  // 리스트가 비어있는 경우
+  // 리스트가 비어있는 조건
   if (p == NULL) {
     h->first = node;
     return 0;
   }
 
-  // key가 첫번째 노드보다 작은 경우
+  // key가 첫번째 노드보다 작은 조건
   if (p->key > key) {
     node->link = p;
     h->first = node;
     return 0;
   }
 
-  // 중간에 삽입하는 경우
+  // 중간에 삽입하는 단계
   while (p->link != NULL && p->link->key <= key) {
     p = p->link;
   }
@@ -189,7 +198,7 @@ int insertNode(headNode *h, int key) {
 }
 
 /**
- * list에 key에 대한 노드하나를 추가
+ * list 마지막에 key에 대한 노드 하나를 추가
  */
 int insertLast(headNode *h, int key) {
   listNode *p = h->first;
@@ -197,7 +206,7 @@ int insertLast(headNode *h, int key) {
   node->key = key;
   node->link = NULL;
 
-  // 리스트가 비어있는 경우
+  // 리스트가 비어있는 조건
   if (p == NULL) {
     h->first = node;
     return 0;
@@ -237,7 +246,7 @@ int deleteNode(headNode *h, int key) {
   listNode *p = h->first;
   listNode *prev = NULL;
 
-  // 리스트가 비어있는 경우
+  // 리스트가 비어있는 조건
   if (p == NULL) {
     free(p);
     printf("Nothing to delete....\n");
@@ -249,20 +258,20 @@ int deleteNode(headNode *h, int key) {
     p = p->link;
   }
 
-  // key를 찾지 못한 경우
+  // key를 찾지 못 한 조건
   if (p == NULL) {
     printf("Cannot found the key....\n");
     return 0;
   }
 
-  // 첫번째 노드를 삭제하는 경우
+  // 첫 번째 노드를 삭제하는 조건
   if (prev == NULL) {
     h->first = p->link;
     free(p);
     return 0;
   }
 
-  // 중간에 있는 노드를 삭제하는 경우
+  // 중간에 있는 노드를 삭제하는 단계
   prev->link = p->link;
   free(p);
 
@@ -276,7 +285,7 @@ int deleteLast(headNode *h) {
   listNode *p = h->first;
   listNode *prev = NULL;
 
-  // 리스트가 비어있는 경우
+  // 리스트가 비어있는 조건
   if (p == NULL) {
     free(p);
     printf("Nothing to delete....\n");
@@ -319,6 +328,7 @@ int invertList(headNode *h) {
   return 0;
 }
 
+// 연결 리스트의 현재 정보를 출력하는 함수 정의
 void printList(headNode *h) {
   int i = 0;
   listNode *p;
