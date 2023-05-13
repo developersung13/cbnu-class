@@ -261,6 +261,7 @@ int deleteNode(headNode *h, int key) {
   // key를 찾지 못 한 조건
   if (p == NULL) {
     printf("Cannot found the key....\n");
+    free(p);
     return 0;
   }
 
