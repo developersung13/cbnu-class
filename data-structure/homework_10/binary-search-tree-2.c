@@ -24,6 +24,8 @@ typedef struct node {
 Node* stack[MAX_STACK_SIZE];
 int top = -1;
 
+Node* pop();
+void push(Node* aNode);
 
 /* for queue */
 #define MAX_QUEUE_SIZE		20
@@ -152,6 +154,17 @@ void recursiveInorder(Node* ptr)
  */
 void iterativeInorder(Node* node)
 {
+	for(;;)
+	{
+		for(; node; node = node->left)
+			push(node);
+		node = pop();
+
+		if(!node) break;
+		printf(" [%d] ", node->key);
+
+		node = node->right;
+	}
 }
 
 /**
@@ -159,6 +172,28 @@ void iterativeInorder(Node* node)
  */
 void levelOrder(Node* ptr)
 {
+	// int front = rear = -1;
+
+	if(!ptr) return; /* empty tree */
+
+	enQueue(ptr);
+
+	for(;;)
+	{
+		ptr = deQueue();
+		if(ptr) {
+			printf(" [%d] ", ptr->key);
+
+			if(ptr->left)
+				enQueue(ptr->left);
+			if(ptr->right)
+				enQueue(ptr->right);
+		}
+		else
+			break;
+
+	}
+
 }
 
 
@@ -208,6 +243,130 @@ int insert(Node* head, int key)
 
 int deleteNode(Node* head, int key)
 {
+	if (head == NULL) {
+		printf("\n Nothing to delete!!\n");
+		return -1;
+	}
+
+	if (head->left == NULL) {
+		printf("\n Nothing to delete!!\n");
+		return -1;
+	}
+
+	/* head->left is the root */
+	Node* root = head->left;
+
+
+
+	Node* parent = NULL;
+	Node* ptr = root;
+
+	while((ptr != NULL)&&(ptr->key != key)) {
+		if(ptr->key != key) {
+
+			parent = ptr;	/* save the parent */
+
+			if(ptr->key > key)
+				ptr = ptr->left;
+			else
+				ptr = ptr->right;
+		}
+	}
+
+	/* there is no node for the key */
+	if(ptr == NULL)
+	{
+		printf("No node for key [%d]\n ", key);
+		return -1;
+	}
+
+	/*
+	 * case 1: the node which has to be removed is a leaf node
+	 */
+	if(ptr->left == NULL && ptr->right == NULL)
+	{
+		if(parent != NULL) { /* parent exists, parent's left and right links are adjusted */
+			if(parent->left == ptr)
+				parent->left = NULL;
+			else
+				parent->right = NULL;
+		} else {
+			/* parent is null, which means the node to be deleted is the root */
+			head->left = NULL;
+
+		}
+
+		free(ptr);
+		return 1;
+	}
+
+	/**
+	 * case 2: if the node to be deleted has one child
+	 */
+	if ((ptr->left == NULL || ptr->right == NULL))
+	{
+		Node* child;
+		if (ptr->left != NULL)
+			child = ptr->left;
+		else
+			child = ptr->right;
+
+		if(parent != NULL)
+		{
+			if(parent->left == ptr)
+				parent->left = child;
+			else
+				parent->right = child;
+		} else {
+			/* parent is null, which means the node to be deleted is the root
+			 * and the root has one child. Therefore, the child should be the root
+			 */
+			root = child;
+		}
+
+		free(ptr);
+		return 1;
+	}
+
+	/**
+	 * case 3: the node (ptr) has two children
+	 *
+	 * we have to find either the biggest descendant node in the left subtree of the ptr
+	 * or the smallest descendant in the right subtree of the ptr.
+	 *
+	 * we will find the smallest descendant from the right subtree of the ptr.
+	 *
+	 */
+
+	Node* candidate;
+	parent = ptr;
+
+
+	candidate = ptr->right;
+
+	/* the smallest node is left deepest node in the right subtree of the ptr */
+	while(candidate->left != NULL)
+	{
+		parent = candidate;
+		candidate = candidate->left;
+	}
+
+	/* the candidate node is the right node which has to be deleted.
+	 * note that candidate's left is null
+	 */
+	if (parent->right == candidate)
+		parent->right = candidate->right;
+	else
+		parent->left = candidate->right;
+
+	/* instead of removing ptr, we just change the key of ptr
+	 * with the key of candidate node and remove the candidate node
+	 */
+
+	ptr->key = candidate->key;
+
+	free(candidate);
+	return 1;
 }
 
 
@@ -241,22 +400,46 @@ int freeBST(Node* head)
 
 Node* pop()
 {
+	if (top < 0) return NULL;
+	return stack[top--];
 }
 
 void push(Node* aNode)
 {
+	stack[++top] = aNode;
 }
 
+
+void printStack()
+{
+	int i = 0;
+	printf("--- stack ---\n");
+	while(i <= top)
+	{
+		printf("stack[%d] = %d\n", i, stack[i]->key);
+	}
+}
 
 
 Node* deQueue()
 {
+	if (front == rear) {
+		// printf("\n....Now Queue is empty!!\n" );
+		return NULL;
+	}
+
+	front = (front + 1) % MAX_QUEUE_SIZE;
+	return queue[front];
+
 }
 
 void enQueue(Node* aNode)
 {
+	rear = (rear + 1) % MAX_QUEUE_SIZE;
+	if (front == rear) {
+		// printf("\n....Now Queue is full!!\n");
+		return;
+	}
+
+	queue[rear] = aNode;
 }
-
-
-
-
