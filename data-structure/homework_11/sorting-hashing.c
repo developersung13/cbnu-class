@@ -46,6 +46,9 @@ int main()
 
 	srand(time(NULL));
 
+	// [---- [Sung Yeolam, 성열암] [2020039037] ----] 문장 출력 및 개행
+    printf("[---- [Sung Yeolam, 성열암] [2020039037] ----]\n");
+
 	do{
 		printf("----------------------------------------------------------------\n");
 		printf("                        Sorting & Hashing                       \n");
