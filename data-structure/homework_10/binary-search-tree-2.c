@@ -137,8 +137,7 @@ int initializeBST(Node** h) {
 
 	/* create a head node */
 	*h = (Node*)malloc(sizeof(Node)); // 헤드 노드를 생성
-	(*h)->left = NULL;	// 헤드 노드의 좌측 자식을 NULL로 설정하여 루트 노드를 가리키도록 함
-	(*h)->right = *h;  // 헤드 노드의 우측 자식을 헤드 노드로 설정(자기 자신을 가리킴)
+	(*h)->left = (*h)->right = NULL;
 	(*h)->key = -9999; // 헤드 노드의 키 값을 -9999로 설정
 
 	top = -1; // 스택의 상단 인덱스를 -1로 초기화
