@@ -23,11 +23,11 @@ int initializeBST(Node** h); // 이진 트리 초기화 함수
 void inorderTraversal(Node* ptr);	  /* recursive inorder traversal */
 void preorderTraversal(Node* ptr);    /* recursive preorder traversal */
 void postorderTraversal(Node* ptr);	  /* recursive postorder traversal */
-int insert(Node* head, int key);  /* insert a node to the tree */
-int deleteLeafNode(Node* head, int key);  /* delete the leaf node for the key */
+void insert(Node* head, int key);  /* insert a node to the tree */
+void deleteLeafNode(Node* head, int key);  /* delete the leaf node for the key */
 Node* searchRecursive(Node* ptr, int key);  /* search the node for the key */
 Node* searchIterative(Node* head, int key);  /* search the node for the key */
-int freeBST(Node* head); /* free all memories allocated to the tree */
+void freeBST(Node* head); /* free all memories allocated to the tree */
 
 /* you may add your own defined functions if necessary */
 
@@ -123,8 +123,7 @@ int initializeBST(Node** h) {
 
 	/* create a head node */
 	*h = (Node*)malloc(sizeof(Node));
-	(*h)->left = NULL;	/* root */
-	(*h)->right = *h;
+	(*h)->left = (*h)->right = NULL;
 	(*h)->key = -9999;
 	return 1;
 }
@@ -157,7 +156,7 @@ void postorderTraversal(Node* ptr)
 }
 
 
-int insert(Node* head, int key) // 새 노드를 이진 탐색 트리에 삽입하는 함수
+void insert(Node* head, int key) // 새 노드를 이진 탐색 트리에 삽입하는 함수
 {
 	Node* newNode = (Node*)malloc(sizeof(Node)); // 새로운 노드를 위한 메모리를 동적으로 할당
 	newNode->key = key; // 새 노드의 키 값을 설정
@@ -197,34 +196,26 @@ int insert(Node* head, int key) // 새 노드를 이진 탐색 트리에 삽입�
 		parentNode->left = newNode; // 부모 노드의 왼쪽 자식 노드로 새 노드를 설정
 	else // 그렇지 않다면 (즉, 부모 노드의 키 값이 입력된 키 값보다 작다면)
 		parentNode->right = newNode; // 부모 노드의 오른쪽 자식 노드로 새 노드를 설정
-	return 1; // 성공적으로 노드를 삽입했음을 나타내는 1을 반환
 }
 
 // 특정 키 값을 가진 잎 노드를 이진 탐색 트리에서 삭제하는 함수
-int deleteLeafNode(Node* head, int key)
+void deleteLeafNode(Node* head, int key)
 {
-	if (head == NULL) { // 만약 헤드 노드가 NULL이라면 (즉, 트리가 없다면)
-		printf("\n Nothing to delete!!\n"); // 삭제할 노드가 없다는 메시지를 출력
-		return -1; // 오류를 나타내는 -1을 반환
-	}
-
-	if (head->left == NULL) { // 트리의 루트 노드가 없다면
+	if (head == NULL || head->left == NULL) {
 		printf("\n Nothing to delete!!\n");
-		return -1;
+		return 0;
 	}
 
 	/* head->left is the root */
 	Node* ptr = head->left;
-
 
 	/* we have to move onto children nodes,
 	 * keep tracking the parent using parentNode */
 	Node* parentNode = head;
 
 	while(ptr != NULL) { // 노드를 찾을 때까지 또는 더 이상 탐색할 노드가 없을 때까지 반복
-
 		if(ptr->key == key) { // 현재 노드의 키 값이 입력된 키 값과 같다면
-			if(ptr->left == NULL && ptr->right == NULL) {
+			if(ptr->left == NULL && ptr->right == NULL) { // 단말 노드일 때
 
 				/* root node case */
 				if(parentNode == head)
@@ -238,7 +229,7 @@ int deleteLeafNode(Node* head, int key)
 
 				free(ptr); // 삭제할 노드의 메모리를 해제
 			}
-			else { // 현재 노드가 잎 노드가 아니라면
+			else { // 현재 노드가 단말 노드가 아닐 때
 				printf("the node [%d] is not a leaf \n", ptr->key);
 			}
 			return 1;
@@ -311,10 +302,10 @@ void freeNode(Node* ptr)
 }
 
 // 이진 탐색 트리를 해제하는 함수
-int freeBST(Node* head)
+void freeBST(Node* head)
 {
     // 만약 헤드 노드의 왼쪽 링크가 자기 자신을 가리키면 (즉, 트리에 노드가 없으면)
-	if(head->left == head)
+	if(head->left == NULL)
 	{
 		free(head); // 헤드 노드를 해제
 		return 1; // 함수 종료
