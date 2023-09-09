@@ -18,8 +18,8 @@ Circle &operator++(Circle &c) {
 }
 
 Circle operator++(Circle &c, int) {
-  Circle temp = c;
-  c.radius++;
+  Circle temp = *this;
+  radius++;
   return temp;
 }
 
