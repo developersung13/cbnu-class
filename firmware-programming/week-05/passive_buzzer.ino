@@ -8,5 +8,5 @@ void loop() {
   tone(pin_passive, 262);
   delay(1000);
   noTone(pin_passive);
-  delay(1000);f 
+  delay(1000);
 }

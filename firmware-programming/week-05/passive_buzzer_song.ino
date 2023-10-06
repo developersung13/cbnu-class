@@ -12,14 +12,15 @@
 #define B4 494
 #define C5 523
 
-int pin_passive = 10;
-int led_c4 = 11;
-int led_d4 = 12;
-int led_e4 = 13;
+int pin_passive = 9;
+int led_c4 = 10;
+int led_d4 = 11;
+int led_e4 = 12;
+int led_f4 = 13;
 
-int melody[] = { C4, D4, E4, 0 };
-int duration_s[] = { 4, 4, 4, 4 };
-int led_s[] = {led_c4, led_d4, led_e4, 0 };
+int melody[] = { C4, D4, E4, C4, E4, C4, E4, D4, E4, F4, F4, E4, D4, F4 };
+int duration_s[] = { 4, 6, 4, 6, 4, 4, 2, 2, 4, 6, 6, 6, 6, 1 };
+int led_s[] = {led_c4, led_d4, led_e4, led_c4, led_e4, led_c4, led_e4, led_d4, led_e4, led_f4, led_f4, led_e4, led_d4, led_f4 };
 
 void setup() {
   pinMode(pin_passive, OUTPUT);
@@ -29,12 +30,16 @@ void setup() {
 }
 
 void loop() {
-  for (int sounds = 0; sounds < 4; sounds++) {
+  for(int sounds = 0; sounds < 14; sounds++){
     int Duration = 1000 / duration_s[sounds];
-    tone(pin_passive, melody[sounds], Duration);
+   tone(pin_passive, melody[sounds]);
+    digitalWrite(led_s[sounds], HIGH);
     delay(Duration);
-    int pauseSound = Duration * 1.3;
-    delay(pauseSound);
+    digitalWrite(led_s[sounds], LOW);
+   
+    float pauseSound = Duration * 1.3;
     noTone(pin_passive);
+    delay(pauseSound);
   }
+
 }
