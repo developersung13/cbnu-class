@@ -15,3 +15,4 @@ void loop() {
 	  tone(pin_active, HIGH);
   else
     noTone(pin_active);
+}
