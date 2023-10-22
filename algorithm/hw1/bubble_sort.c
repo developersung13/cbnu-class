@@ -15,7 +15,7 @@ void bubble_sort(int arr[], int n){
     for (k = 0; k < n - 1; k++){
         swapped = false;
         for (z = 0; z < n - k - 1; z++){
-            if (arr[z] < arr[z + 1]) {
+            if (arr[z] > arr[z + 1]) {
                 swap(&arr[z], &arr[z + 1]);
                 swapped = true;
             }
