@@ -31,7 +31,7 @@ int main() {
 
     int arr[100];
 
-    printf("Before Selection Sorting: ");
+    printf("Before Bubble Sorting: ");
     for (int k = 0; k < 100; k++) {
         // 1~3000 사이의 임의의 정수 생성
         arr[k] = rand() % 3000 + 1; 
@@ -44,7 +44,7 @@ int main() {
     bubble_sort(arr, n);
     clock_t e_time = clock();  // 실행 종료 시간 기록
     
-    printf("After Selection Sorting: ");
+    printf("After Bubble Sorting: ");
     for (int k = 0; k < n; k++)
         printf("%d ", arr[k]);
     printf("\n");
