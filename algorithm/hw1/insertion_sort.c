@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 void insertion_sort(int arr[], int n){
     int k, z, key;
     for (k = 1; k < n; k++){
