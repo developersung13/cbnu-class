@@ -5,8 +5,6 @@
 
 SoftwareSerial BT(BTtx, BTrx);
 
-// BT(2, 3);
-
 char data = 'F';
 
 void setup() {
