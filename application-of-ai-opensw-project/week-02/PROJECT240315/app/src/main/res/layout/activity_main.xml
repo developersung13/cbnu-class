@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/nate_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="네이트 홈페이지 열기"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/call911_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:layout_below="@+id/nate_btn"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="911 응급센터 걸기" />
+
+    <Button
+        android:id="@+id/gallery_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:layout_below="@+id/call911_btn"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="갤러리 열기" />
+
+    <Button
+        android:id="@+id/end_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:layout_below="@+id/gallery_btn"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="끝내기" />
+
+</RelativeLayout>
