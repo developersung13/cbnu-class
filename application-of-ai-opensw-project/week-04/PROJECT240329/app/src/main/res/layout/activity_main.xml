@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_userinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020039037 성열암"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout_userinfo"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/checkbox_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선택을 시작하시겠습니까?" />
+
+            <CheckBox
+                android:id="@+id/start_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_tv"
+                android:text="시작함" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout_checkbox"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/radio_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아하는 애온동물은?" />
+
+            <RadioGroup
+                android:id="@+id/animal_radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radio_tv">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="강아지" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="고양이" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="토끼" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/selectImageComplete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/animal_radioGroup"
+                android:backgroundTint="@color/lightGray"
+                android:padding="0dp"
+                android:text="선택 완료"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/animal_imageView"
+            android:layout_width="500px"
+            android:layout_height="500px"
+            android:layout_below="@+id/relativeLayout_radioGroup"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/nate_btn"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/gray"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:text="네이트 홈페이지 열기"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textStyle="bold" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/call911_btn"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/green"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:layout_below="@+id/nate_btn"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:text="911 응급센터 걸기" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/gallery_btn"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/red"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:layout_below="@+id/call911_btn"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:text="갤러리 열기" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/end_btn"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/yellow"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:layout_below="@+id/gallery_btn"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:text="끝내기" />-->
+
+</RelativeLayout>
