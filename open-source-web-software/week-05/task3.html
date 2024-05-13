@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 3</title>
+    <style>
+      ul {
+        display: flex;
+        justify-content: center;
+        column-gap: 1rem;
+        border: 1px solid red;
+        margin-bottom: 1;
+      }
+
+      button {
+        padding: 0.5rem;
+        background: transparent;
+        border: none;
+        margin-right: 1rem;
+        text-transform: uppercase;
+      }
+
+      button:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .profle-box {
+        display: flex;
+        padding-bottom: 5px;
+        border-bottom: 1px solid black;
+
+        h1 {
+          text-transform: capitalize;
+        }
+      }
+
+      .up-btn {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+        margin: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="top_section">
+      <button>home</button
+      ><button>introduce</button
+      ><button>content</button
+      ><button>schedule</button
+      ><button>more</button>
+    </ul>
+    <div class="profle-box">
+      <img src="./src/profile.png" alt="profile image" width="175px" />
+      <div>
+        <h1>introduce</h1>
+        <p>Hello! My name is ~~~~</p>
+        <p>My major is ~~~~</p>
+        <p>My number is ~~~~</p>
+        <p>My hobby is ~~~~</p>
+      </div>
+    </div>
+    <h2>test</h2>
+    <h2>test</h2>
+    <h2>test</h2>
+    <h2>test</h2>
+    <a class="up-btn" href="#top_section">UP</a>
+  </body>
+</html>
