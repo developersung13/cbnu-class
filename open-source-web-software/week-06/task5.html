@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task #5</title>
+  </head>
+  <body>
+    <div class="test">
+      <label for="inputValue">Input:</label>
+      <input type="text" id="inputValue" />
+      <button onclick="stackValue()">Stack</button>
+      <br /><br />
+      <button onclick="showStack()">Show</button>
+      <br />
+    </div>
+    <p id="stackValues"></p>
+
+    <script>
+      let stack = [];
+
+      function stackValue() {
+        const inputValue = document.getElementById('inputValue').value;
+        stack.push(inputValue);
+        document.getElementById('inputValue').value = ''; // Clear input after stacking
+      }
+
+      function showStack() {
+        const stackValuesElement = document.getElementById('stackValues');
+        stackValuesElement.innerHTML = ''; // Clear previous content
+        stack.forEach((value) => {
+          const valueElement = document.createElement('p');
+          valueElement.textContent = value;
+          stackValuesElement.appendChild(valueElement);
+        });
+        // Clear input and stack buttons
+        const divs = document.getElementsByClassName('test');
+        for (let i = 0; i < divs.length; i++) {
+          divs[i].style.display = 'none';
+        }
+        document.querySelector('button:nth-of-type(1)').style.display = 'none';
+        document.querySelector('button:nth-of-type(2)').style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

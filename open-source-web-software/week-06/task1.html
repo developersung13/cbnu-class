@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task #1</title>
+  </head>
+  <body>
+    <h2>JavaScript function</h2>
+    <script>
+      // Original calculations
+      document.write(
+        'The result of squaring the number 3 is ' + Math.pow(3, 2) + '<br>'
+      );
+      document.write('Half of 5 is ' + 5 / 2 + '<br>');
+      document.write('5 is ' + (5 / 10) * 100 + '% of 10' + '<br>');
+      document.write(
+        'The result of squaring the number 2 is ' + Math.pow(2, 2) + '<br>'
+      );
+      document.write(
+        'The area of circle with radius 2 ' + Math.PI * Math.pow(2, 2) + '<br>'
+      );
+
+      // Crazy calculations
+      document.write('<br>Do crazy stuff<br>');
+      var num = 5;
+      var result = Math.pow(num, 2);
+      document.write('Half of ' + num + ' is ' + num / 2 + '<br>');
+      document.write(
+        'The result of squaring the number 2.5 is ' + Math.pow(2.5, 2) + '<br>'
+      );
+
+      num = 2.5;
+      result = Math.pow(num, 2);
+      document.write(
+        'The result of squaring the number ' +
+          Math.pow(2.5, 2) +
+          ' is ' +
+          Math.pow(Math.pow(2.5, 2), 2) +
+          '<br>'
+      );
+
+      num = result;
+      result = Math.PI * Math.pow(num, 2);
+      document.write(
+        'The area of circle with radius ' + num + ' is ' + result + '<br>'
+      );
+
+      var percentageValue = (num / result) * 100;
+      document.write(
+        num + ' is ' + percentageValue.toFixed(15) + '% of ' + result + '<br>'
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task #4</title>
+  </head>
+  <body>
+    <h2>JavScript Controls</h2>
+    <script>
+      const addHumanizingNumberSuffix = (ranking) => {
+        if (
+          (ranking % 100 >= 11 && ranking % 100 <= 13) ||
+          ranking % 10 === 0
+        ) {
+          return ranking + 'th';
+        } else {
+          const lastDigit = ranking % 10;
+          switch (lastDigit) {
+            case 1:
+              return ranking + 'st';
+            case 2:
+              return ranking + 'nd';
+            case 3:
+              return ranking + 'rd';
+            default:
+              return ranking + 'th';
+          }
+        }
+      };
+
+      document.write('Number to humanize: <br>');
+      document.write(addHumanizingNumberSuffix(1) + '<br>');
+      document.write(addHumanizingNumberSuffix(8) + '<br>');
+      document.write(addHumanizingNumberSuffix(301) + '<br>');
+      document.write(addHumanizingNumberSuffix(402) + '<br>');
+      document.write(addHumanizingNumberSuffix(711) + '<br>');
+    </script>
+  </body>
+</html>
