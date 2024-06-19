@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Task</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('button').click(function () {
+          var task = $('input').val();
+          if (task) {
+            $('.to-do-list').append('<li>' + task + '</li>');
+            $('input').val('');
+          }
+        });
+      });
+    </script>
+    <style>
+      .to-do-list {
+        margin-top: 1rem;
+        list-style-type: decimal;
+      }
+
+      .to-do-list li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is To Do list</h1>
+    <p>Type in your tasks and press add button</p>
+
+    <input type="text" />
+    <button>Add</button>
+
+    <ul class="to-do-list"></ul>
+  </body>
+</html>

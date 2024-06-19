@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('button')
+          .first()
+          .click(function () {
+            $('.box').animate(
+              {
+                width: '25rem',
+                height: '10rem',
+                borderWidth: '30px',
+              },
+
+              3000
+            );
+            $('.box h1').animate(
+              {
+                fontSize: '3rem',
+              },
+              3000
+            );
+          });
+
+        $('button')
+          .last()
+          .click(function () {
+            $('.box').animate(
+              {
+                width: '15rem',
+                height: '9rem',
+                borderWidth: '1px',
+              },
+
+              3000
+            );
+            $('.box h1').animate(
+              {
+                fontSize: '1.75rem',
+              },
+              3000
+            );
+          });
+      });
+    </script>
+    <style>
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgb(177 203 173);
+        width: 15rem;
+        height: 9rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgb(113 158 105);
+      }
+
+      .box h1 {
+        font-size: 1.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>Hello World!</h1>
+    </div>
+
+    <button>Start Chaining</button>
+    <button>Reset</button>
+  </body>
+</html>

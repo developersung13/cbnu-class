@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let keypressCount = 0;
+
+        $('input').keypress(function () {
+          keypressCount++;
+          $('.container > div > span').eq(1).text(keypressCount);
+          $('.key-press-trigger-result')
+            .stop(true, true)
+            .fadeIn(0)
+            .fadeOut(1000);
+        });
+      });
+    </script>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5rem;
+      }
+
+      input {
+        width: 12.5rem;
+      }
+
+      .key-press-trigger-result {
+        margin-top: -0.25rem;
+        padding: 1rem;
+        background-color: rgb(186, 240, 177);
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" />
+      <div><span>Keypress: </span> <span>0</span></div>
+      <div>
+        <strong>Note:</strong>
+        <span>Enter something inside the input box and see the result.</span>
+      </div>
+      <p class="key-press-trigger-result">Keypress is triggered.</p>
+    </div>
+  </body>
+</html>
