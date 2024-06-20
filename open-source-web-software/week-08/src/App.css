@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  column-gap: 2rem;
+
+  .num-sentence {
+    width: fit-content;
+    height: fit-content;
+    margin: 1rem;
+    padding: 0.5rem 0rem;
+    border: 1px solid black;
+
+    & > p {
+      margin: 0;
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+
+    & > p:nth-child(2) {
+      margin: 1.25rem 0.25rem 2rem 0;
+    }
+
+    .function-result-container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+
+      .function-title {
+        font-weight: 800;
+      }
+    }
+  }
+
+  .profile-container {
+    margin: 1rem;
+
+    .name,
+    .affiliation {
+      font-weight: 800;
+    }
+  }
+}
